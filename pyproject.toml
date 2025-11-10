@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glam-sdk"
+version = "0.1.3"
+description = "Python SDK for GLAM protocol"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "Apache-2.0" }
+authors = [{ name = "GLAM Systems", email = "yuru@glam.systems" }]
+keywords = ["solana", "blockchain", "glam", "sdk"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = ["anchorpy>=0.21.0", "solana>=0.36.0", "solders>=0.26.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "black>=23.0", "mypy>=1.0", "ruff>=0.1.0"]
+
+[project.urls]
+Homepage = "https://github.com/glamsystems/glam-sdk-py"
+Documentation = "https://docs.glam.systems"
+Repository = "https://github.com/glamsystems/glam-sdk-py"
+Issues = "https://github.com/glamsystems/glam-sdk-py/issues"
+
+[tool.setuptools.packages.find]
+include = ["glam*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py38"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"

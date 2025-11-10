@@ -25,7 +25,7 @@ class ForceTransferTokensAccounts(typing.TypedDict):
     glamMint:SolPubkey
     fromTokenAccount:SolPubkey
     toAta:SolPubkey
-    from:SolPubkey
+    from_:SolPubkey
     to:SolPubkey
     toPolicyAccount:SolPubkey
     systemProgram:SolPubkey
@@ -44,7 +44,7 @@ def ForceTransferTokens(
     AccountMeta(pubkey=accounts["glamMint"], is_signer=False, is_writable=True),
     AccountMeta(pubkey=accounts["fromTokenAccount"], is_signer=False, is_writable=True),
     AccountMeta(pubkey=accounts["toAta"], is_signer=False, is_writable=True),
-    AccountMeta(pubkey=accounts["from"], is_signer=False, is_writable=False),
+    AccountMeta(pubkey=accounts["from_"], is_signer=False, is_writable=False),
     AccountMeta(pubkey=accounts["to"], is_signer=False, is_writable=False),
     AccountMeta(pubkey=accounts["toPolicyAccount"], is_signer=False, is_writable=True),
     AccountMeta(pubkey=accounts["systemProgram"], is_signer=False, is_writable=False),

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "glam-sdk"
-version = "0.1.3"
+version = "0.1.4"
 description = "Python SDK for GLAM protocol"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -26,7 +26,7 @@ classifiers = [
 dependencies = ["anchorpy>=0.21.0", "solana>=0.36.0", "solders>=0.26.0"]
 
 [project.optional-dependencies]
-dev = ["pytest>=7.0", "black>=23.0", "mypy>=1.0", "ruff>=0.1.0"]
+dev = ["pytest>=7.0", "mypy>=1.0", "ruff>=0.1.0"]
 
 [project.urls]
 Homepage = "https://github.com/glamsystems/glam-sdk-py"
@@ -37,10 +37,22 @@ Issues = "https://github.com/glamsystems/glam-sdk-py/issues"
 [tool.setuptools.packages.find]
 include = ["glam*"]
 
-[tool.black]
-line-length = 100
-target-version = ["py38"]
-
 [tool.ruff]
 line-length = 100
 target-version = "py38"
+exclude = ["glam/mint/", "glam/protocol/"]
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "N",  # pep8-naming
+    "UP", # pyupgrade
+]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

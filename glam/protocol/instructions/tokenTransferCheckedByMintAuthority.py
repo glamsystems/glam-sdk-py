@@ -26,7 +26,7 @@ class TokenTransferCheckedByMintAuthorityAccounts(typing.TypedDict):
     glamVault:SolPubkey
     glamMint:SolPubkey
     glamMintAuthority:SolPubkey
-    from:SolPubkey
+    from_:SolPubkey
     to:SolPubkey
     mint:SolPubkey
     tokenProgram:SolPubkey
@@ -42,7 +42,7 @@ def TokenTransferCheckedByMintAuthority(
     AccountMeta(pubkey=accounts["glamVault"], is_signer=False, is_writable=True),
     AccountMeta(pubkey=accounts["glamMint"], is_signer=False, is_writable=True),
     AccountMeta(pubkey=accounts["glamMintAuthority"], is_signer=True, is_writable=True),
-    AccountMeta(pubkey=accounts["from"], is_signer=False, is_writable=True),
+    AccountMeta(pubkey=accounts["from_"], is_signer=False, is_writable=True),
     AccountMeta(pubkey=accounts["to"], is_signer=False, is_writable=True),
     AccountMeta(pubkey=accounts["mint"], is_signer=False, is_writable=False),
     AccountMeta(pubkey=accounts["tokenProgram"], is_signer=False, is_writable=False),

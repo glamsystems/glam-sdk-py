@@ -24,7 +24,7 @@ class BurnTokensAccounts(typing.TypedDict):
     glamSigner:SolPubkey
     glamMint:SolPubkey
     fromTokenAccount:SolPubkey
-    from:SolPubkey
+    from_:SolPubkey
     token2022Program:SolPubkey
 
 def BurnTokens(
@@ -38,7 +38,7 @@ def BurnTokens(
     AccountMeta(pubkey=accounts["glamSigner"], is_signer=True, is_writable=True),
     AccountMeta(pubkey=accounts["glamMint"], is_signer=False, is_writable=True),
     AccountMeta(pubkey=accounts["fromTokenAccount"], is_signer=False, is_writable=True),
-    AccountMeta(pubkey=accounts["from"], is_signer=False, is_writable=False),
+    AccountMeta(pubkey=accounts["from_"], is_signer=False, is_writable=False),
     AccountMeta(pubkey=accounts["token2022Program"], is_signer=False, is_writable=False),
     ]
     if remaining_accounts is not None:

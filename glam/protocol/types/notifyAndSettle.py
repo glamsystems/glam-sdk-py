@@ -40,7 +40,7 @@ class NotifyAndSettle:
         "redeemSettlementPeriod" /borsh.U64,
         "redeemCancellationWindow" /borsh.U64,
         "timeUnit" /timeUnit.layout,
-        "padding" /FixedSizeBytes(3,GreedyBytes),
+        "padding" /borsh.U8[3],
         )
     #fields
     model: valuationModel.ValuationModelKind
@@ -70,7 +70,7 @@ class NotifyAndSettle:
         redeemSettlementPeriod=obj["redeemSettlementPeriod"],
         redeemCancellationWindow=obj["redeemCancellationWindow"],
         timeUnit=timeUnit.from_decoded(obj["timeUnit"]),
-        padding=obj["padding"],
+        padding=bytes(obj["padding"]),
         )
 
     def to_encodable(self) -> dict[str, typing.Any]:

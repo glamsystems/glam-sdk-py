@@ -170,10 +170,10 @@ class StateAccount:
                 "timelockDuration": self.timelockDuration,
                 "timelockExpiresAt": self.timelockExpiresAt,
                 "mint": self.mint,
-                "assets": ,
+                "assets": self.assets,
                 "integrationAcls": list(map(lambda item:item.to_encodable(),self.integrationAcls)),
                 "delegateAcls": list(map(lambda item:item.to_encodable(),self.delegateAcls)),
-                "externalPositions": ,
+                "externalPositions": self.externalPositions,
                 "pricedProtocols": list(map(lambda item:item.to_encodable(),self.pricedProtocols)),
                 "params": self.params,
                 }

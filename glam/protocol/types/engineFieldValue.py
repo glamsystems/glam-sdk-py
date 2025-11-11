@@ -239,7 +239,7 @@ class VecPubkey:
 
     def to_encodable(self) -> dict[str, typing.Any]:
         return {
-            "VecPubkey":{ "val": }
+            "VecPubkey":{ "val": self.val }
             }
 
 

@@ -21,7 +21,7 @@ class CreatedModelJSON(typing.TypedDict):
 @dataclass
 class CreatedModel:
     layout: typing.ClassVar = borsh.CStruct(
-        "key" /FixedSizeBytes(8,GreedyBytes),
+        "key" /borsh.U8[8],
         "createdBy" /BorshPubkey,
         "createdAt" /borsh.I64,
         )
@@ -33,7 +33,7 @@ class CreatedModel:
     @classmethod
     def from_decoded(cls, obj: Container) -> "CreatedModel":
         return cls(
-        key=obj["key"],
+        key=bytes(obj["key"]),
         createdBy=obj["createdBy"],
         createdAt=obj["createdAt"],
         )

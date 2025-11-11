@@ -31,7 +31,7 @@ class IntegrationPermissions:
     def from_decoded(cls, obj: Container) -> "IntegrationPermissions":
         return cls(
         integrationProgram=obj["integrationProgram"],
-        protocolPermissions=list(map(lambda item:protocolPermissions.ProtocolPermissions.from_json(item),obj["protocolPermissions"])),
+        protocolPermissions=list(map(lambda item:protocolPermissions.ProtocolPermissions.from_decoded(item),obj["protocolPermissions"])),
         )
 
     def to_encodable(self) -> dict[str, typing.Any]:

@@ -19,7 +19,7 @@ class OracleConfigsJSON(typing.TypedDict):
 class OracleConfigs:
     layout: typing.ClassVar = borsh.CStruct(
         "maxAgesSeconds" /borsh.Vec(typing.cast(Construct, borsh.U16[2])),
-        "padding" /FixedSizeBytes(12,GreedyBytes),
+        "padding" /borsh.U8[12],
         )
     #fields
     maxAgesSeconds: list[list[int]]
@@ -29,7 +29,7 @@ class OracleConfigs:
     def from_decoded(cls, obj: Container) -> "OracleConfigs":
         return cls(
         maxAgesSeconds=obj["maxAgesSeconds"],
-        padding=obj["padding"],
+        padding=bytes(obj["padding"]),
         )
 
     def to_encodable(self) -> dict[str, typing.Any]:

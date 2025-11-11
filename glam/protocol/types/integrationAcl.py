@@ -35,7 +35,7 @@ class IntegrationAcl:
         return cls(
         integrationProgram=obj["integrationProgram"],
         protocolsBitmask=obj["protocolsBitmask"],
-        protocolPolicies=list(map(lambda item:protocolPolicy.ProtocolPolicy.from_json(item),obj["protocolPolicies"])),
+        protocolPolicies=list(map(lambda item:protocolPolicy.ProtocolPolicy.from_decoded(item),obj["protocolPolicies"])),
         )
 
     def to_encodable(self) -> dict[str, typing.Any]:
@@ -59,9 +59,3 @@ class IntegrationAcl:
                 protocolsBitmask=obj["protocolsBitmask"],
                 protocolPolicies=list(map(lambda item:protocolPolicy.ProtocolPolicy.from_json(item),obj["protocolPolicies"])),
         )
-
-
-
-
-
-

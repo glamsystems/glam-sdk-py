@@ -61,7 +61,7 @@ class PricedProtocol:
                 "lastUpdatedSlot": self.lastUpdatedSlot,
                 "integrationProgram": self.integrationProgram,
                 "protocolBitflag": self.protocolBitflag,
-                "positions": ,
+                "positions": self.positions,
                 }
 
     def to_json(self) -> PricedProtocolJSON:

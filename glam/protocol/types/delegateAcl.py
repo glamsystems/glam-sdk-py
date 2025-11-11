@@ -29,12 +29,12 @@ class DelegateAcl:
     pubkey: SolPubkey
     integrationPermissions: list[integrationPermissions.IntegrationPermissions]
     expiresAt: int
-    
+
     @classmethod
     def from_decoded(cls, obj: Container) -> "DelegateAcl":
         return cls(
         pubkey=obj["pubkey"],
-        integrationPermissions=list(map(lambda item:integrationPermissions.IntegrationPermissions.from_json(item),obj["integrationPermissions"])),
+        integrationPermissions=list(map(lambda item:integrationPermissions.IntegrationPermissions.from_decoded(item),obj["integrationPermissions"])),
         expiresAt=obj["expiresAt"],
         )
 
@@ -59,9 +59,3 @@ class DelegateAcl:
                 integrationPermissions=list(map(lambda item:integrationPermissions.IntegrationPermissions.from_json(item),obj["integrationPermissions"])),
                 expiresAt=obj["expiresAt"],
         )
-
-
-
-
-
-

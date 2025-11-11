@@ -32,13 +32,13 @@ class StateModelJSON(typing.TypedDict):
 class StateModel:
     layout: typing.ClassVar = borsh.CStruct(
         "accountType" /borsh.Option(accountType.layout),
-        "name" /borsh.Option(FixedSizeBytes(32,GreedyBytes)),
+        "name" /borsh.Option(borsh.U8[32]),
         "uri" /borsh.Option(borsh.String),
         "enabled" /borsh.Option(borsh.Bool),
         "assets" /borsh.Option(borsh.Vec(typing.cast(Construct, BorshPubkey))),
         "created" /borsh.Option(createdModel.CreatedModel.layout),
         "owner" /borsh.Option(BorshPubkey),
-        "portfolioManagerName" /borsh.Option(FixedSizeBytes(32,GreedyBytes)),
+        "portfolioManagerName" /borsh.Option(borsh.U8[32]),
         "borrowable" /borsh.Option(borsh.Vec(typing.cast(Construct, BorshPubkey))),
         "timelockDuration" /borsh.Option(borsh.U32),
         "integrationAcls" /borsh.Option(borsh.Vec(typing.cast(Construct, integrationAcl.IntegrationAcl.layout))),
@@ -65,14 +65,14 @@ class StateModel:
         name=(None if obj["name"] is None else obj["name"]),
         uri=(None if obj["uri"] is None else obj["uri"]),
         enabled=(None if obj["enabled"] is None else obj["enabled"]),
-        assets=(None if obj["assets"] is None else list(map(lambda item:SolPubkey.from_string(item),obj["assets"]))),
+        assets=(None if obj["assets"] is None else obj["assets"]),
         created=(None if obj["created"] is None else createdModel.CreatedModel.from_decoded(obj["created"])),
         owner=(None if obj["owner"] is None else obj["owner"]),
         portfolioManagerName=(None if obj["portfolioManagerName"] is None else obj["portfolioManagerName"]),
-        borrowable=(None if obj["borrowable"] is None else list(map(lambda item:SolPubkey.from_string(item),obj["borrowable"]))),
+        borrowable=(None if obj["borrowable"] is None else obj["borrowable"]),
         timelockDuration=(None if obj["timelockDuration"] is None else obj["timelockDuration"]),
-        integrationAcls=(None if obj["integrationAcls"] is None else list(map(lambda item:integrationAcl.IntegrationAcl.from_json(item),obj["integrationAcls"]))),
-        delegateAcls=(None if obj["delegateAcls"] is None else list(map(lambda item:delegateAcl.DelegateAcl.from_json(item),obj["delegateAcls"]))),
+        integrationAcls=(None if obj["integrationAcls"] is None else list(map(lambda item:integrationAcl.IntegrationAcl.from_decoded(item),obj["integrationAcls"]))),
+        delegateAcls=(None if obj["delegateAcls"] is None else list(map(lambda item:delegateAcl.DelegateAcl.from_decoded(item),obj["delegateAcls"]))),
         )
 
     def to_encodable(self) -> dict[str, typing.Any]:
@@ -123,6 +123,7 @@ class StateModel:
                 integrationAcls=(None if obj["integrationAcls"] is None else list(map(lambda item:integrationAcl.IntegrationAcl.from_json(item),obj["integrationAcls"]))),
                 delegateAcls=(None if obj["delegateAcls"] is None else list(map(lambda item:delegateAcl.DelegateAcl.from_json(item),obj["delegateAcls"]))),
         )
+
 
 
 

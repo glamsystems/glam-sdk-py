@@ -26,7 +26,13 @@ classifiers = [
 dependencies = ["anchorpy>=0.21.0", "solana>=0.36.0", "solders>=0.26.0"]
 
 [project.optional-dependencies]
-dev = ["pytest>=7.0", "mypy>=1.0", "ruff>=0.1.0"]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-xprocess>=0.18.0",
+    "mypy>=1.0",
+    "ruff>=0.1.0",
+]
 
 [project.urls]
 Homepage = "https://github.com/glamsystems/glam-sdk-py"
@@ -56,3 +62,10 @@ ignore = []
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
+
+[tool.pytest.ini_options]
+addopts = "-p no:anchorpy"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]

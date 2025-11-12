@@ -18,20 +18,11 @@ class GlamClient:
 
     async def __aenter__(self):
         """Async context manager entry"""
+        self._async_client = AsyncClient(self.connection._provider.endpoint_uri)
         return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         """Async context manager exit - automatically closes connection"""
-        await self.close()
-
-    async def _get_async_client(self):
-        """Get or create async client"""
-        if self._async_client is None:
-            self._async_client = AsyncClient(self.connection._provider.endpoint_uri)
-        return self._async_client
-
-    async def close(self):
-        """Close the async client connection"""
         if self._async_client is not None:
             await self._async_client.close()
             self._async_client = None
@@ -41,10 +32,8 @@ class GlamClient:
     ) -> Optional[StateAccount]:
         """Fetch account data from solana at self.vault_state and return a state model"""
         try:
-            async_client = await self._get_async_client()
-
             state_account = await StateAccount.fetch(
-                conn=async_client, address=self.vault_state, commitment=commitment
+                conn=self._async_client, address=self.vault_state, commitment=commitment
             )
 
             return state_account
@@ -57,11 +46,7 @@ class GlamClient:
         """Get the PDA of the vault account"""
         from .protocol.program_id import GLAM_PROTOCOL_PROGRAM_ADDRESS
 
-        # SEED_VAULT = "vault" in bytes
-        seeds = [
-            b"\x76\x61\x75\x6c\x74",  # "vault" seed
-            bytes(self.vault_state),  # state PDA as bytes
-        ]
+        seeds = [b"vault", bytes(self.vault_state)]
 
         pda, _bump = Pubkey.find_program_address(seeds, GLAM_PROTOCOL_PROGRAM_ADDRESS)
         return pda
@@ -72,13 +57,13 @@ async def main():
     if len(sys.argv) > 1:
         state_pubkey_str = sys.argv[1]
     else:
-        sys.exit("Usage: python -m glam.client <state_pubkey>")
+        sys.exit("Usage: python -m glam.client <vault_state>")
 
     try:
         state_pubkey = Pubkey.from_string(state_pubkey_str)
     except Exception as e:
         print(f"Error: Invalid pubkey '{state_pubkey_str}': {e}")
-        print("Usage: python -m glam.client <state_pubkey>")
+        print("Usage: python -m glam.client <vault_state>")
         return
 
     async with GlamClient(
@@ -87,6 +72,8 @@ async def main():
     ) as client:
         state_account = await client.get_state_account()
         integration_acls = state_account.integrationAcls
+
+        print(f"Vault PDA: {client.get_vault_pda()}")
         print(f"Found {len(integration_acls)} integration ACLs:")
 
         for i, integration_acl in enumerate(integration_acls):

@@ -49,4 +49,4 @@ ruff format .
 
 ## Note
 
-This SDK code under `glam/mint` and `glam/protocol` directories is auto-generated from the GLAM program IDLs using [codama-pyt](https://github.com/Solana-ZH/codama-py). Do not manually edit the generated files.
+This SDK code under `glam/mint` and `glam/protocol` directories is auto-generated from the GLAM program IDLs using [codama-py](https://github.com/Solana-ZH/codama-py). Do not manually edit the generated files.
